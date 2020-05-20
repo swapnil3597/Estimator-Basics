@@ -6,7 +6,7 @@ import setuptools
 NAME = 'trainer'
 VERSION = '1.0'
 REQUIRED_PACKAGES = [
-    'tensorflow',
+    'tensorflow==2.1.0',
     'pandas'
 ]
 

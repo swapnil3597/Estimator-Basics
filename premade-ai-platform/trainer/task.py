@@ -5,6 +5,8 @@ import numpy as np
 import pandas as pd
 import argparse
 
+tf.get_logger().setLevel('INFO')
+
 def get_args():
   """Define the task arguments with the default values.
   Returns:

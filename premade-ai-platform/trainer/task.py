@@ -98,12 +98,30 @@ classifier = tf.estimator.DNNClassifier(
 # eval_result = classifier.evaluate(
 #     input_fn=lambda: input_fn(test, test_y, training=False))
 
+def serving_input_receiver_fn():
+    """
+      Serving function for batch predictions
+    """
+    receiver_tensors = tf.keras.layers.Input(shape=[4], dtype=tf.float32)
+    feature = {'SepalLength':tf.convert_to_tensor([5]),
+               'SepalWidth':tf.convert_to_tensor([4]), 
+               'PetalLength':tf.convert_to_tensor([3]), 
+               'PetalWidth':tf.convert_to_tensor([4])}
+
+    return tf.estimator.export.ServingInputReceiver(
+        features=feature,
+        receiver_tensors=receiver_tensors)
+
+exporter = tf.estimator.FinalExporter(
+      'exporter', lambda: serving_input_receiver_fn())
+
 
 train_spec = tf.estimator.TrainSpec(input_fn=lambda: input_fn(train, train_y, training=True),
                                     max_steps=200)
 
 eval_spec = tf.estimator.EvalSpec(input_fn=lambda: input_fn(test, test_y, training=False),
                                   steps=5,
+                                  exporters=[exporter],
                                   start_delay_secs=2,
                                   throttle_secs=5)
 

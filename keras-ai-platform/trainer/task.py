@@ -21,6 +21,27 @@ def get_compiled_model(model=None):
                 metrics=['sparse_categorical_accuracy'])
   return model
 
+def get_args():
+  """Define the task arguments with the default values.
+  Returns:
+      experiment parameters
+  """
+
+  args_parser = argparse.ArgumentParser()
+
+  args_parser.add_argument(
+      '--strategy',
+      help="""
+        Distribution Strategy
+      """,
+      required=True,
+      type=str
+  )
+
+  return args_parser.parse_args()
+
+args = get_args()
+
 # Prepare Data ----
 (x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
 
@@ -40,10 +61,11 @@ y_train = y_train[:-10000]
 
 
 # Define Strategy
-strategy = tf.distribute.MirroredStrategy()
-
-
-with strategy.scope():
+if args.strategy == 'mirror':
+  strategy = tf.distribute.MirroredStrategy()
+  with strategy.scope():
+    model = get_compiled_model()
+else:
   model = get_compiled_model()
 
 

@@ -1,0 +1,5 @@
+trainingInput:
+  masterType: standard_gpu
+  scaleTier: CUSTOM
+  evaluatorType: n1-highcpu-16
+  evaluatorCount: 1

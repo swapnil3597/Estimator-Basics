@@ -1,5 +1,5 @@
 trainingInput:
   masterType: complex_model_m_gpu
   scaleTier: CUSTOM
-  evaluatorType: n1-highcpu-16
+  evaluatorType: standard_gpu
   evaluatorCount: 1

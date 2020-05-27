@@ -55,7 +55,8 @@ train_dataset = train_dataset.shuffle(buffer_size=1024).batch(64)
 val_dataset = tf.data.Dataset.from_tensor_slices((x_val, y_val))
 val_dataset = val_dataset.batch(64)
 
-model.fit(train_dataset, epochs=3,
+model.fit(train_dataset, epochs=100,
           # Only run validation using the first 10 batches of the dataset
           # using the `validation_steps` argument
-          validation_data=val_dataset, validation_steps=10)
+          validation_data=val_dataset, validation_steps=10,
+          verbose=2)

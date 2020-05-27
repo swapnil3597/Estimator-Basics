@@ -2,7 +2,7 @@ REGION="us-east1"
 BUCKET_NAME="qognition-ai-ic"
 
 now=$(date +"%Y%m%d_%H%M%S")
-JOB_NAME="Premade_$now"
+JOB_NAME="Keras_dummy_model_$now"
 MODEL_DIR="gs://$BUCKET_NAME/Premade/logs_$now/"
 
 MAIN_TRAINER_MODULE="trainer.task"

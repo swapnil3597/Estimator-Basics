@@ -1,4 +1,4 @@
-## Basic Tensorflow codes
+## Basic Tensorflow code Templates
 ### Contents:
 
 ```bash
